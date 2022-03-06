@@ -42,40 +42,96 @@ var specialCharacters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"];
 
 function generatePassword() {
 
-  password.length = prompt("Please enter length of password between 8 and 128 characters", "12");
+  password.length = prompt("Please enter length of password between 8 and 128 characters", "12"); //throw an error if not between 8 and 128
+  
   console.log(password.length);
 
-  if (confirm("Do you want to include lower case characters?")) {
-    var i = Math.floor(Math.random() * lowerCase.length);
-    var characterLowerCase = lowerCase[i];
+  var includeLowerCase = confirm("Do you want to include lower case characters?");
+  var includeUpperCase = confirm("Do you want to include upper case characters?");
+  var includeNumeric = confirm("Do you want to include numeric characters?");
+  var includeSpecialCharacters = confirm("Do you want to include special characters?");
+
+  console.log(includeLowerCase);
+  console.log(includeUpperCase);
+  console.log(includeNumeric);
+  console.log(includeSpecialCharacters);
+
+  var superSet;
+  var temp = [];
+
+  if (includeLowerCase && includeUpperCase && includeNumeric && includeSpecialCharacters) {
+    
+    superSet = lowerCase.concat(upperCase, numeric, specialCharacters);
+ 
+  } else if (includeLowerCase && includeUpperCase && includeNumeric && !includeSpecialCharacters) {
+
+    superSet = lowerCase.concat(upperCase, numeric);
+
+  } else if (includeLowerCase && includeUpperCase && !includeNumeric && includeSpecialCharacters) {
+
+    superSet = lowerCase.concat(upperCase, specialCharacters);
+
+  } else if (includeLowerCase && includeUpperCase && !includeNumeric && !includeSpecialCharacters) {
+
+    superSet = lowerCase.concat(upperCase);
+
+  } else if (includeLowerCase && !includeUpperCase && includeNumeric && includeSpecialCharacters) {
+
+    superSet = lowerCase.concat(numeric, specialCharacters);
+
+  } else if (includeLowerCase && !includeUpperCase && includeNumeric && !includeSpecialCharacters) {
+
+    superSet = lowerCase.concat(numeric);
+
+  } else if (includeLowerCase && !includeUpperCase && !includeNumeric && includeSpecialCharacters) {
+
+    superSet = lowerCase.concat(numeric, specialCharacters);
+
+  } else if (includeLowerCase && !includeUpperCase && !includeNumeric && !includeSpecialCharacters) {
+
+    superSet = lowerCase;
+
+  }   if (!includeLowerCase && includeUpperCase && includeNumeric && includeSpecialCharacters) {
+    
+    superSet = upperCase.concat(numeric, specialCharacters);
+
+  }   if (!includeLowerCase && includeUpperCase && includeNumeric && !includeSpecialCharacters) {
+    
+    superSet = upperCase.concat(numeric);
+
+  }   if (!includeLowerCase && includeUpperCase && !includeNumeric && includeSpecialCharacters) {
+    
+    superSet = upperCase.concat(specialCharacters);
+
+  }   if (!includeLowerCase && includeUpperCase && !includeNumeric && !includeSpecialCharacters) {
+    
+    superSet = upperCase;
+
+  }   if (!includeLowerCase && !includeUpperCase && includeNumeric && includeSpecialCharacters) {
+    
+    superSet = numeric.concat(specialCharacters);
+
+  }   if (!includeLowerCase && !includeUpperCase && includeNumeric && !includeSpecialCharacters) {
+    
+    superSet = numeric;
+
+  }   if (!includeLowerCase && !includeUpperCase && !includeNumeric && includeSpecialCharacters) {
+    
+    superSet = specialCharacters;
+
+  }   if (!includeLowerCase && !includeUpperCase && !includeNumeric && !includeSpecialCharacters) {
+    
+    superSet = null; //how do i print a password when they select no characters??
+
   }
 
-  console.log(characterLowerCase);
-
-  if (confirm("Do you want to include upper case characters?")) {
-    var i = Math.floor(Math.random() * upperCase.length);
-    var characterUpperCase = upperCase[i];
+  for (var i = 0; i < password.length; i++) {
+    temp[i] = superSet[Math.floor(Math.random() * superSet.length)];
+    console.log(temp[i]); //how the freak do i ensure there is one type of character always?
   }
 
-  console.log(characterUpperCase);
-
-  if (confirm("Do you want to include numeric characters?")) {
-    var i = Math.floor(Math.random() * numeric.length);
-    var characterNumeric = numeric[i];
-  }
-
-  console.log(characterNumeric);
-
-  if (confirm("Do you want to include special characters?")) {
-    var i = Math.floor(Math.random() * specialCharacters.length);
-    var characterSpecial = specialCharacters[i];
-  }
-
-  console.log(characterSpecial);
-
-
-password = characterLowerCase + characterUpperCase + characterNumeric + characterSpecial;
-console.log(password);
-
+  password = temp.toString();
+  console.log(password);
+  return(password);
 
 }
