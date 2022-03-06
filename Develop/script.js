@@ -38,7 +38,7 @@ var upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
 
 var numeric = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-var specialCharacters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"];
+var specialCharacters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"]; //better way to populate these?
 
 function generatePassword() {
 
@@ -56,7 +56,7 @@ function generatePassword() {
   console.log(includeNumeric);
   console.log(includeSpecialCharacters);
 
-  var superSet;
+  var superSet = [];
   var temp = [];
 
   if (includeLowerCase && includeUpperCase && includeNumeric && includeSpecialCharacters) {
@@ -132,6 +132,8 @@ function generatePassword() {
 
   password = temp.toString();
   console.log(password);
-  return(password);
+  return(password); //how to print without commas?
+
+  //how to clear screen before each "generate button" press?
 
 }
