@@ -18,15 +18,16 @@ generateBtn.addEventListener("click", writePassword);
 // To be accomplished:
 // 1. Click a button to generate password I get prompts
 // 2. Select which to include lowercase, uppercase, numeric and/or special characters
-// 3. Choose length of pass word between 8-128 characters
+// 3. Choose length of password between 8-128 characters
 // 4. Password should have atleast one character type selected
 // 5. Display password
 
 // Steps to get there:
 // 1. Create buckets of each lowercase, uppercase, numeric, special characters
 // 2. Send prompts and taken response
-// 3. Based on response create a bucket of prompts selected
-// 4. create and array of lengths specified.
+// 2.1 Issue an error when length chosen is invalid
+// 3. Based on response create a bucket of prompts selected in a randomized way
+// 4. create an password array of lengths specified.
 // 5. Check if array has each prompt specified atleast once in array
 // 6. If not, replace a random element with a random of the missing type
 
@@ -38,11 +39,11 @@ var upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
 
 var numeric = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-var specialCharacters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"]; //better way to populate these?
+var specialCharacters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"]; //better way to populate these? - No
 
 function generatePassword() {
 
-  password.length = prompt("Please enter length of password between 8 and 128 characters", "12"); //throw an error if not between 8 and 128
+  password.length = prompt("Please enter length of password between 8 and 128 characters", "12"); //throw an error if not between 8 and 128 -- if statement for invalid legnth and recall
   
   console.log(password.length);
 
@@ -61,7 +62,7 @@ function generatePassword() {
 
   if (includeLowerCase && includeUpperCase && includeNumeric && includeSpecialCharacters) {
     
-    superSet = lowerCase.concat(upperCase, numeric, specialCharacters);
+    superSet = lowerCase.concat(upperCase, numeric, specialCharacters); //what if concatanated in a random fashion?
  
   } else if (includeLowerCase && includeUpperCase && includeNumeric && !includeSpecialCharacters) {
 
@@ -85,7 +86,7 @@ function generatePassword() {
 
   } else if (includeLowerCase && !includeUpperCase && !includeNumeric && includeSpecialCharacters) {
 
-    superSet = lowerCase.concat(numeric, specialCharacters);
+    superSet = lowerCase.concat(specialCharacters);
 
   } else if (includeLowerCase && !includeUpperCase && !includeNumeric && !includeSpecialCharacters) {
 
@@ -125,15 +126,26 @@ function generatePassword() {
 
   }
 
+
+
+
+  // Creates the password 
   for (var i = 0; i < password.length; i++) {
     temp[i] = superSet[Math.floor(Math.random() * superSet.length)];
     console.log(temp[i]); //how the freak do i ensure there is one type of character always?
   }
 
-  password = temp.toString();
-  console.log(password);
-  return(password); //how to print without commas?
+  //Guranteed characters = function pickRandomIndex
+  //Push a gauranteed characeters to 
+  //temp[i] = gauranteedCharacters[i] for all the elements to chec
 
-  //how to clear screen before each "generate button" press?
+  // Converts array to string without commas between elements of array
+  password = temp.join("");
+  console.log(password);
+  return(password); 
+
+  //how to clear screen before each "generate button" press? Maybe figure out how to clear the password window in index.html because it works if you click generate password.
+
+  //something doesnt look right in github for the html
 
 }
