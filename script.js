@@ -13,24 +13,6 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-//write function here
-
-// To be accomplished:
-// 1. Click a button to generate password I get prompts
-// 2. Select which to include lowercase, uppercase, numeric and/or special characters
-// 3. Choose length of password between 8-128 characters
-// 4. Password should have atleast one character type selected
-// 5. Display password
-
-// Steps to get there:
-// 1. Create buckets of each lowercase, uppercase, numeric, special characters
-// 2. Send prompts and taken response
-// 2.1 Issue an error when length chosen is invalid
-// 3. Based on response create a bucket of prompts selected in a randomized way
-// 4. create an password array of lengths specified.
-// 5. Add elements to password array to ensure requested characters
-
-
 //Creates an array of all lower case characters
 var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
 "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
