@@ -28,123 +28,167 @@ generateBtn.addEventListener("click", writePassword);
 // 2.1 Issue an error when length chosen is invalid
 // 3. Based on response create a bucket of prompts selected in a randomized way
 // 4. create an password array of lengths specified.
-// 5. Check if array has each prompt specified atleast once in array
-// 6. If not, replace a random element with a random of the missing type
+// 5. Add elements to password array to ensure requested characters
 
+
+//Creates an array of all lower case characters
 var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
 "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
+//Creates an array of all upper case characters
 var upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
 "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
+//Creates an array of all numeric characters
 var numeric = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-var specialCharacters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"]; //better way to populate these? - No
+//Creates an array of all special characters
+var specialCharacters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"];
 
+//Function declaration
 function generatePassword() {
-
-  password.length = prompt("Please enter length of password between 8 and 128 characters", "12"); //throw an error if not between 8 and 128 -- if statement for invalid legnth and recall
   
-  console.log(password.length);
+  //Get input from user regarding length of password
+  var howLong;
+  howLong = prompt("Please enter length of password between 8 and 128 characters", "12"); 
+  console.log(howLong);
 
+  //Validating the length of password selected 
+  while (howLong < 8 || howLong > 128) {
+    howLong = prompt("Please length must be between *8 and 128* characters long", "12");
+  }
+
+  //Get input from user regarding characterts to utilize in password
   var includeLowerCase = confirm("Do you want to include lower case characters?");
   var includeUpperCase = confirm("Do you want to include upper case characters?");
   var includeNumeric = confirm("Do you want to include numeric characters?");
   var includeSpecialCharacters = confirm("Do you want to include special characters?");
 
+  //Can delete this
   console.log(includeLowerCase);
   console.log(includeUpperCase);
   console.log(includeNumeric);
   console.log(includeSpecialCharacters);
 
+  //Initialize arrays used to generate password
   var superSet = [];
   var temp = [];
+  var gauranteed_characters = [];
+
+  //Contains conditions regarding the different inputs requested by user
 
   if (includeLowerCase && includeUpperCase && includeNumeric && includeSpecialCharacters) {
     
-    superSet = lowerCase.concat(upperCase, numeric, specialCharacters); //what if concatanated in a random fashion?
+    superSet = lowerCase.concat(upperCase, numeric, specialCharacters);
+    gauranteed_characters[0] = lowerCase[Math.floor(Math.random() * lowerCase.length)];
+    gauranteed_characters[1] = upperCase[Math.floor(Math.random() * upperCase.length)];
+    gauranteed_characters[2] = numeric[Math.floor(Math.random() * numeric.length)];
+    gauranteed_characters[3] = specialCharacters[Math.floor(Math.random() * specialCharacters.length)];
  
   } else if (includeLowerCase && includeUpperCase && includeNumeric && !includeSpecialCharacters) {
 
     superSet = lowerCase.concat(upperCase, numeric);
+    gauranteed_characters[0] = lowerCase[Math.floor(Math.random() * lowerCase.length)];
+    gauranteed_characters[1] = upperCase[Math.floor(Math.random() * upperCase.length)];
+    gauranteed_characters[2] = numeric[Math.floor(Math.random() * numeric.length)];
 
   } else if (includeLowerCase && includeUpperCase && !includeNumeric && includeSpecialCharacters) {
 
     superSet = lowerCase.concat(upperCase, specialCharacters);
+    gauranteed_characters[0] = lowerCase[Math.floor(Math.random() * lowerCase.length)];
+    gauranteed_characters[1] = upperCase[Math.floor(Math.random() * upperCase.length)];
+    gauranteed_characters[2] = specialCharacters[Math.floor(Math.random() * specialCharacters.length)];
 
   } else if (includeLowerCase && includeUpperCase && !includeNumeric && !includeSpecialCharacters) {
 
     superSet = lowerCase.concat(upperCase);
+    gauranteed_characters[0] = lowerCase[Math.floor(Math.random() * lowerCase.length)];
+    gauranteed_characters[1] = upperCase[Math.floor(Math.random() * upperCase.length)];
 
   } else if (includeLowerCase && !includeUpperCase && includeNumeric && includeSpecialCharacters) {
 
     superSet = lowerCase.concat(numeric, specialCharacters);
+    gauranteed_characters[0] = lowerCase[Math.floor(Math.random() * lowerCase.length)];
+    gauranteed_characters[1] = numeric[Math.floor(Math.random() * numeric.length)];
+    gauranteed_characters[2] = specialCharacters[Math.floor(Math.random() * specialCharacters.length)];
 
   } else if (includeLowerCase && !includeUpperCase && includeNumeric && !includeSpecialCharacters) {
 
     superSet = lowerCase.concat(numeric);
+    gauranteed_characters[0] = lowerCase[Math.floor(Math.random() * lowerCase.length)];
+    gauranteed_characters[1] = numeric[Math.floor(Math.random() * numeric.length)];
 
   } else if (includeLowerCase && !includeUpperCase && !includeNumeric && includeSpecialCharacters) {
 
     superSet = lowerCase.concat(specialCharacters);
+    gauranteed_characters[0] = lowerCase[Math.floor(Math.random() * lowerCase.length)];
+    gauranteed_characters[1] = specialCharacters[Math.floor(Math.random() * specialCharacters.length)];
 
   } else if (includeLowerCase && !includeUpperCase && !includeNumeric && !includeSpecialCharacters) {
 
     superSet = lowerCase;
+    gauranteed_characters[0] = lowerCase[Math.floor(Math.random() * lowerCase.length)];
 
   }   if (!includeLowerCase && includeUpperCase && includeNumeric && includeSpecialCharacters) {
     
     superSet = upperCase.concat(numeric, specialCharacters);
+    gauranteed_characters[0] = upperCase[Math.floor(Math.random() * upperCase.length)];
+    gauranteed_characters[1] = numeric[Math.floor(Math.random() * numeric.length)];
+    gauranteed_characters[2] = specialCharacters[Math.floor(Math.random() * specialCharacters.length)];
 
   }   if (!includeLowerCase && includeUpperCase && includeNumeric && !includeSpecialCharacters) {
     
     superSet = upperCase.concat(numeric);
+    gauranteed_characters[0] = upperCase[Math.floor(Math.random() * upperCase.length)];
+    gauranteed_characters[1] = numeric[Math.floor(Math.random() * numeric.length)];
 
   }   if (!includeLowerCase && includeUpperCase && !includeNumeric && includeSpecialCharacters) {
     
     superSet = upperCase.concat(specialCharacters);
+    gauranteed_characters[0] = upperCase[Math.floor(Math.random() * upperCase.length)];
+    gauranteed_characters[1] = specialCharacters[Math.floor(Math.random() * specialCharacters.length)];
 
   }   if (!includeLowerCase && includeUpperCase && !includeNumeric && !includeSpecialCharacters) {
     
     superSet = upperCase;
+    gauranteed_characters[0] = upperCase[Math.floor(Math.random() * upperCase.length)];
 
   }   if (!includeLowerCase && !includeUpperCase && includeNumeric && includeSpecialCharacters) {
     
     superSet = numeric.concat(specialCharacters);
+    gauranteed_characters[0] = numeric[Math.floor(Math.random() * numeric.length)];
+    gauranteed_characters[1] = specialCharacters[Math.floor(Math.random() * specialCharacters.length)];
 
   }   if (!includeLowerCase && !includeUpperCase && includeNumeric && !includeSpecialCharacters) {
     
     superSet = numeric;
+    gauranteed_characters[0] = numeric[Math.floor(Math.random() * numeric.length)];
 
   }   if (!includeLowerCase && !includeUpperCase && !includeNumeric && includeSpecialCharacters) {
     
     superSet = specialCharacters;
+    gauranteed_characters[0] = specialCharacters[Math.floor(Math.random() * specialCharacters.length)];
 
   }   if (!includeLowerCase && !includeUpperCase && !includeNumeric && !includeSpecialCharacters) {
-    
-    superSet = null; //how do i print a password when they select no characters??
+
+    alert("You got to choose some characters to get a response, yo! Try again.");
 
   }
 
 
-
-
-  // Creates the password 
-  for (var i = 0; i < password.length; i++) {
+  // Creates the password of length minus the gauranteed characters to be added.
+  for (var i = 0; i < howLong - gauranteed_characters.length; i++) {
     temp[i] = superSet[Math.floor(Math.random() * superSet.length)];
     console.log(temp[i]); //how the freak do i ensure there is one type of character always?
-  }
+  }  
 
-  //Guranteed characters = function pickRandomIndex
-  //Push a gauranteed characeters to 
-  //temp[i] = gauranteedCharacters[i] for all the elements to chec
+  //Concatenating the string of gauranteed characters and temp array to ensure atleast one character of type requested
+  temp = gauranteed_characters.concat(temp);
 
-  // Converts array to string without commas between elements of array
+  //Converts array to string without commas between elements of array
   password = temp.join("");
   console.log(password);
   return(password); 
-
-  //how to clear screen before each "generate button" press? Maybe figure out how to clear the password window in index.html because it works if you click generate password.
 
   //something doesnt look right in github for the html
 
