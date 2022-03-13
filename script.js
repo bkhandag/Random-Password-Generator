@@ -25,7 +25,9 @@ var upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
 var numeric = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 //Creates an array of all special characters
-var specialCharacters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")"];
+var specialCharacters = ["!", "#", "$", "%", "&", "'", "(", ")", "*", 
+"+", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]",
+ "^", "_", "`", "{", "|", "}", "~"];
 
 //Function declaration
 function generatePassword() {
@@ -46,19 +48,12 @@ function generatePassword() {
   var includeNumeric = confirm("Do you want to include numeric characters?");
   var includeSpecialCharacters = confirm("Do you want to include special characters?");
 
-  //Can delete this
-  console.log(includeLowerCase);
-  console.log(includeUpperCase);
-  console.log(includeNumeric);
-  console.log(includeSpecialCharacters);
-
   //Initialize arrays used to generate password
   var superSet = [];
   var temp = [];
   var gauranteed_characters = [];
 
   //Contains conditions regarding the different inputs requested by user
-
   if (includeLowerCase && includeUpperCase && includeNumeric && includeSpecialCharacters) {
     
     superSet = lowerCase.concat(upperCase, numeric, specialCharacters);
@@ -157,7 +152,6 @@ function generatePassword() {
 
   }
 
-
   // Creates the password of length minus the gauranteed characters to be added.
   for (var i = 0; i < howLong - gauranteed_characters.length; i++) {
     temp[i] = superSet[Math.floor(Math.random() * superSet.length)];
@@ -171,7 +165,5 @@ function generatePassword() {
   password = temp.join("");
   console.log(password);
   return(password); 
-
-  //something doesnt look right in github for the html
 
 }

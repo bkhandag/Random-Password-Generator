@@ -1,15 +1,28 @@
 # Random-Password-Generator
-To be accomplished:
-1. Click a button to generate password I get prompts
-2. Select which to include lowercase, uppercase, numeric and/or special characters
-3. Choose length of password between 8-128 characters, validate this input
-4. Password should have atleast one character type selected, validate this input
-5. Display password
 
-Steps to get there:
-1. Create buckets of each lowercase, uppercase, numeric, special characters
-2. Send prompts and taken response
-3. Issue an error when length chosen is invalid
-4. Based on response create a bucket of prompts selected in a randomized way
-5. Create an password array of lengths specified.
-6. Add elements to password array to ensure requested characters
+## Description:
+This is a random password generator. It takes input from user regarding the length and type of characters desired in the password. A message is displayed if an invalid password length or no characters are selected.
+
+### Pseudo Code:
+* Create buckets of each lowercase, uppercase, numeric, special characters
+* Send prompts and taken response
+* Issue an error when length chosen is invalid
+* Based on response create a bucket of prompts selected in a randomized way
+* Create an password array of lengths specified.
+* Add elements to password array to ensure requested characters
+
+## Deployed Application:
+https://bkhandag.github.io/Random-Password-Generator/
+
+## Visual:
+!["The Password Generator application asks the length of password".](./Assets/characterLength.png)
+
+![""](./Assets/lowercase.png)
+
+![""](./Assets/uppercase.png)
+
+![""](./Assets/numeric.png)
+
+![""](./Assets/special%20characters.png)
+
+![""](./Assets/Generated%20password.png)
