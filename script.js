@@ -35,7 +35,6 @@ function generatePassword() {
   //Get input from user regarding length of password
   var howLong;
   howLong = prompt("Please enter length of password between 8 and 128 characters", "12"); 
-  console.log(howLong);
 
   //Validating the length of password selected 
   while (howLong < 8 || howLong > 128) {
@@ -155,7 +154,6 @@ function generatePassword() {
   // Creates the password of length minus the gauranteed characters to be added.
   for (var i = 0; i < howLong - gauranteed_characters.length; i++) {
     temp[i] = superSet[Math.floor(Math.random() * superSet.length)];
-    console.log(temp[i]); //how the freak do i ensure there is one type of character always?
   }  
 
   //Concatenating the string of gauranteed characters and temp array to ensure atleast one character of type requested
@@ -163,7 +161,6 @@ function generatePassword() {
 
   //Converts array to string without commas between elements of array
   password = temp.join("");
-  console.log(password);
   return(password); 
 
 }
